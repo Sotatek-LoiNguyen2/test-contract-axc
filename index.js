@@ -186,11 +186,11 @@ const approveAndTransferNFT = async () => {
 
 const setNFTURI = async () => {
     let tx;
-    console.log("Wallet02 set uri for NFTDoberman with id = 02")
+    console.log("Wallet02 set uri for NFTDoberman, which has id = 02")
     await web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY_WALLET_02)
     const imageUri = "https://4.bp.blogspot.com/-lJBqKP4d-cw/U5R4GGtoOUI/AAAAAAAAAME/-8t7w_6RJzk/s1600/1356827633_468284755_3-Purebred-Doberman-Puppies-from-CKC-Registered-Parents-Barrie.jpg"
     tx = await NFTDoberman_contract.methods.setTokenURI(2, imageUri).send({ from: wallet_02, gas: "21000000" })
-    console.log(await web3.eth.getTransactionReceipt(tx.transactionHash))
+    console.log("Uri of NFTDoberman-2", await web3.eth.getTransactionReceipt(tx.transactionHash))
 
 }
 
