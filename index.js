@@ -13,8 +13,8 @@ const wallet_03 = process.env.WALLET_03
 const TokenA_abi = require('./abis/TokenA.json')
 const NFTDoberman_abi = require('./abis/NFTDoberman.json')
 
-const TokenA_addr = "0x11528F3B291EEAAEb4eF29bF5fd7972AE53318d4"
-const NFTDoberman_addr = "0x9CAaEF8149286022a3423B1c24e6d4F695Cd88d4"
+const TokenA_addr = "0xDCE0b3acA9dc1c892Bbc746f19F3eDAb06e12176"
+const NFTDoberman_addr = "0xf25A13ffd2e73a2814142585bbBE7587Ec10d43B"
 
 const TokenA_contract = new web3.eth.Contract(TokenA_abi, TokenA_addr)
 const NFTDoberman_contract = new web3.eth.Contract(NFTDoberman_abi, NFTDoberman_addr)
@@ -66,9 +66,9 @@ const mintTokenA = async () => {
     console.log("Balances of wallet 02: ", await TokenA_contract.methods.balanceOf(wallet_02).call())
     console.log("Balances of wallet 03: ", await TokenA_contract.methods.balanceOf(wallet_03).call())
 
-    console.log("Wallet01 mint to wallet02")
+    console.log("Wallet01 mint to wallet02 400 tokens")
     await web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY_WALLET_01);
-    tx = await TokenA_contract.methods.mint(wallet_02, BigNumber(400e18)).send({ from: wallet_01, gas: "21000000" })
+    tx = await TokenA_contract.methods.mint(wallet_02, BigNumber(999999600e18)).send({ from: wallet_01, gas: "21000000" })
     console.log("Balances of wallet 01: ", await TokenA_contract.methods.balanceOf(wallet_01).call())
     console.log("Balances of wallet 02: ", await TokenA_contract.methods.balanceOf(wallet_02).call())
     console.log("Balances of wallet 03: ", await TokenA_contract.methods.balanceOf(wallet_03).call())
@@ -99,7 +99,7 @@ const mintTokenAFail = async () => {
 
 const transferTokenA = async () => {
     let tx;
-    console.log("Wallet02 transfer to wallet03")
+    console.log("Wallet02 transfer 100 tokens to wallet03")
     await web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY_WALLET_02);
     tx = await TokenA_contract.methods.transfer(wallet_03, BigNumber(100e18)).send({ from: wallet_02, gas: "21000000" })
     console.log("Balances of wallet 01: ", await TokenA_contract.methods.balanceOf(wallet_01).call())
@@ -111,7 +111,7 @@ const transferTokenA = async () => {
 
 const approveAndTransferTokenA = async () => {
     let tx;
-    console.log("Wallet02 approve for wallet03, then wallet03 transfer token of wallet02 to wallet01")
+    console.log("Wallet02 approve for wallet03, then wallet03 transfer 50 tokens of wallet02 to wallet01")
     await web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY_WALLET_02)
     tx = await TokenA_contract.methods.approve(wallet_03, BigNumber(55e18)).send({ from: wallet_02, gas: "21000000" })
     console.log(await web3.eth.getTransactionReceipt(tx.transactionHash))
@@ -134,21 +134,21 @@ const mintNFT = async () => {
 
     console.log("Wallet01 mint to wallet02")
     await web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY_WALLET_01);
-    tx = await NFTDoberman_contract.methods.safeMint(wallet_02, 1).send({ from: wallet_01, gas: "21000000" })
+    tx = await NFTDoberman_contract.methods.safeMint(wallet_02, 4).send({ from: wallet_01, gas: "21000000" })
     console.log("Balances of wallet 01: ", await NFTDoberman_contract.methods.balanceOf(wallet_01).call())
     console.log("Balances of wallet 02: ", await NFTDoberman_contract.methods.balanceOf(wallet_02).call())
     console.log("Balances of wallet 03: ", await NFTDoberman_contract.methods.balanceOf(wallet_03).call())
 
     console.log("Wallet01 mint to wallet02")
     await web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY_WALLET_01);
-    await NFTDoberman_contract.methods.safeMint(wallet_02, 2).send({ from: wallet_01, gas: "21000000" })
+    await NFTDoberman_contract.methods.safeMint(wallet_02, 5).send({ from: wallet_01, gas: "21000000" })
     console.log("Balances of wallet 01: ", await NFTDoberman_contract.methods.balanceOf(wallet_01).call())
     console.log("Balances of wallet 02: ", await NFTDoberman_contract.methods.balanceOf(wallet_02).call())
     console.log("Balances of wallet 03: ", await NFTDoberman_contract.methods.balanceOf(wallet_03).call())
 
     console.log("Wallet01 mint to wallet02")
     await web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY_WALLET_01);
-    await NFTDoberman_contract.methods.safeMint(wallet_02, 3).send({ from: wallet_01, gas: "21000000" })
+    await NFTDoberman_contract.methods.safeMint(wallet_02, 6).send({ from: wallet_01, gas: "21000000" })
     console.log("Balances of wallet 01: ", await NFTDoberman_contract.methods.balanceOf(wallet_01).call())
     console.log("Balances of wallet 02: ", await NFTDoberman_contract.methods.balanceOf(wallet_02).call())
     console.log("Balances of wallet 03: ", await NFTDoberman_contract.methods.balanceOf(wallet_03).call())
@@ -188,7 +188,7 @@ const setNFTURI = async () => {
     let tx;
     console.log("Wallet02 set uri for NFTDoberman, which has id = 02")
     await web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY_WALLET_02)
-    const imageUri = "https://4.bp.blogspot.com/-lJBqKP4d-cw/U5R4GGtoOUI/AAAAAAAAAME/-8t7w_6RJzk/s1600/1356827633_468284755_3-Purebred-Doberman-Puppies-from-CKC-Registered-Parents-Barrie.jpg"
+    const imageUri = "https://api.opensea.io/api/v2/metadata/matic/0x2953399124F0cBB46d2CbACD8A89cF0599974963/0xCA3D80E318E077DFBB96D18B0C9E7F9A083498B60000000000003C0000000001"
     tx = await NFTDoberman_contract.methods.setTokenURI(2, imageUri).send({ from: wallet_02, gas: "21000000" })
     console.log("Uri of NFTDoberman-2", await web3.eth.getTransactionReceipt(tx.transactionHash))
 
