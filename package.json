@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@ethereumjs/common": "^3.1.1",
+    "@ethereumjs/tx": "^4.1.1",
     "@openzeppelin/contracts": "^4.8.1",
     "bignumber.js": "^9.1.1",
     "dotenv": "^16.0.3",
