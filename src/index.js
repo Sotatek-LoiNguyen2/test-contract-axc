@@ -10,8 +10,8 @@ const wallet_01 = process.env.WALLET_01
 const wallet_02 = process.env.WALLET_02
 const wallet_03 = process.env.WALLET_03
 
-const TokenA_abi = require('./abis/TokenA.json')
-const NFTDoberman_abi = require('./abis/NFTDoberman.json')
+const TokenA_abi = require('../abis/TokenA.json')
+const NFTDoberman_abi = require('../abis/NFTDoberman.json')
 
 const TokenA_addr = "0xDCE0b3acA9dc1c892Bbc746f19F3eDAb06e12176"
 const NFTDoberman_addr = "0xf25A13ffd2e73a2814142585bbBE7587Ec10d43B"
